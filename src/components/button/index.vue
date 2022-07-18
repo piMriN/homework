@@ -1,11 +1,13 @@
 <template>
   <button
-    class="na-button"
-    :class="[theme, isRound, isBorder, isSize]"
-    :disabled="disabled"
+    @click="change"
+    :disabled="disabled || loading"
+    class="yang-button"
     :style="[minWidthCss]"
+    :class="[theme, isRound, isBorder, isSize, blockCss]"
   >
     <span>
+      <i v-if="loading" class="iconfont icon-prefix icon-loading"></i>
       <i v-if="prefix" class="iconfont icon-prefix" :class="iconPrefix"></i>
       <slot></slot>
       <i v-if="suffix" class="iconfont icon-suffix" :class="iconSuffix"></i>
@@ -21,13 +23,13 @@ export default {
       type: String,
       default: "",
     },
-    size: {
-      type: String,
-      default: "",
-    },
     minWidth: {
       type: String,
       default: "95px",
+    },
+    size: {
+      type: String,
+      default: "",
     },
     prefix: {
       type: String,
@@ -40,10 +42,12 @@ export default {
     round: Boolean,
     border: Boolean,
     disabled: Boolean,
+    block: Boolean,
+    loading: Boolean,
   },
   computed: {
     theme() {
-      return this.type ? `na-button-${this.type}` : "";
+      return this.type ? `yang-button-${this.type}` : "";
     },
     isRound() {
       return this.round ? "is-round" : "";
@@ -64,95 +68,18 @@ export default {
     iconSuffix() {
       return this.suffix ? `icon-${this.suffix}` : "";
     },
+    blockCss() {
+      return this.block ? "yang-button-block" : "";
+    },
+  },
+  methods: {
+    change() {
+      this.$emit("click");
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.na-button {
-  border-width: 1px;
-  border-style: solid;
-  border-color: #dcdfe6;
-  height: 40px;
-  padding: 0 20px;
-  background-color: #fff;
-  border-radius: 4px;
-  font-size: 14px;
-  color: #606266;
-  cursor: pointer;
-
-  + .na-button {
-    margin-left: 14px;
-  }
-  > span {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .icon-prefix {
-    margin-right: 10px;
-  }
-  .icon-suffix {
-    margin-left: 10px;
-  }
-}
-.na-button-medium {
-  height: 38px;
-}
-.na-button-small {
-  padding: 0 15px;
-  height: 32px;
-  font-size: 12px;
-}
-.na-button-mini {
-  padding: 0 15px;
-  height: 28px;
-  font-size: 12px;
-}
-.na-button[disabled] {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-.na-button-primary {
-  background-color: #409eff;
-  border-color: #409eff;
-  color: #fff;
-  &.is-border {
-    background-color: transparent;
-    color: #409eff;
-  }
-}
-.na-button-success {
-  background-color: #00d100;
-  border-color: #00d100;
-  color: #fff;
-  &.is-border {
-    background-color: transparent;
-    color: #00d100;
-  }
-}
-.na-button-danger {
-  background-color: #e6a23c;
-  border-color: #e6a23c;
-  color: #fff;
-  &.is-border {
-    background-color: transparent;
-    color: #e6a23c;
-  }
-}
-.na-button-warning {
-  background-color: #f56c6c;
-  border-color: #f56c6c;
-  color: #fff;
-  &.is-border {
-    background-color: transparent;
-    color: #f56c6c;
-  }
-}
-
-// 圆角
-.is-round {
-  border-radius: 100px;
-}
+@import "./button.scss";
 </style>
