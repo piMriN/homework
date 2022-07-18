@@ -1,5 +1,5 @@
 <template>
-  <button class="na-button na-button-primary">
+  <button class="na-button na-button-primary is-round">
     <slot></slot>
   </button>
 </template>
@@ -42,5 +42,9 @@ export default {
   background-color: #f56c6c;
   border-color: #f56c6c;
   color: #fff;
+}
+.na-button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 </style>
