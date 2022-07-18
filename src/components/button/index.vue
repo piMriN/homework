@@ -3,8 +3,13 @@
     class="na-button"
     :class="[theme, isRound, isBorder, isSize]"
     :disabled="disabled"
+    :style="[minWidthCss]"
   >
-    <slot></slot>
+    <span>
+      <i v-if="prefix" class="iconfont icon-prefix" :class="iconPrefix"></i>
+      <slot></slot>
+      <i v-if="suffix" class="iconfont icon-suffix" :class="iconSuffix"></i>
+    </span>
   </button>
 </template>
 
@@ -17,6 +22,18 @@ export default {
       default: "",
     },
     size: {
+      type: String,
+      default: "",
+    },
+    minWidth: {
+      type: String,
+      default: "95px",
+    },
+    prefix: {
+      type: String,
+      default: "",
+    },
+    suffix: {
       type: String,
       default: "",
     },
@@ -37,6 +54,16 @@ export default {
     isSize() {
       return this.size ? `yang-button-${this.size}` : "";
     },
+    minWidthCss() {
+      if (!this.minWidth) return "";
+      return { "min-width": this.minWidth };
+    },
+    iconPrefix() {
+      return this.prefix ? `icon-${this.prefix}` : "";
+    },
+    iconSuffix() {
+      return this.suffix ? `icon-${this.suffix}` : "";
+    },
   },
 };
 </script>
@@ -56,6 +83,18 @@ export default {
 
   + .na-button {
     margin-left: 14px;
+  }
+  > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon-prefix {
+    margin-right: 10px;
+  }
+  .icon-suffix {
+    margin-left: 10px;
   }
 }
 .na-button-medium {
