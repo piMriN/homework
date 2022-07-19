@@ -1,9 +1,6 @@
 <template>
   <div class="home">
-    <yangButton>默认按钮</yangButton>
-    <yangButton type="primary">成功按钮</yangButton>
-    <yangButton type="danger">危险按钮</yangButton>
-    <yangButton type="warning">警告按钮</yangButton>
+    <na-table :column='column'></na-table>
   </div>
 </template>
 
@@ -12,20 +9,17 @@ export default {
   name: "Home",
   data() {
     return {
-      flag: false,
+      column:[
+        {label:'日期',prop:'date'},
+        {label:'姓名',prop:'name'},
+        {label:'地址',prop:'address'},
+        {label:'性别',prop:'sex'}
+      ]
     };
   },
   components: {
-    yangButton: () => import("../components/button/index.vue"),
+    naTable: () => import("../components/table/index.vue"),
   },
-  methods: {
-    handleSubmit() {
-      this.flag = true;
-      setTimeout(() => {
-        console.log("123");
-        this.flag = false;
-      }, 3000);
-    },
-  },
+  methods: {},
 };
 </script>
