@@ -1,11 +1,31 @@
 <template>
   <div class="home">
-    <na-table :column="column" checkbox index>
+    <el-button type="primary" @click="getCheckList"
+      >测试获取复选框选中的数据</el-button
+    >
+    <na-table
+      init-request
+      @onLoad="onLoad"
+      :check-list.sync="checkList"
+      :column="column"
+      index
+      checkbox
+      :data="data_1"
+      :params="params_1"
+      url="/name/"
+      method="post"
+    >
       <template v-slot:operation="slot">
-        <el-button type="primary" @click="handleEdit(slot.data)"
-          >编辑</el-button
+        <na-button type="primary" @click="handleEdit(slot.data)"
+          >编辑</na-button
         >
         <na-button type="danger" @click="handleDelete(slot.data)"
+          >删除</na-button
+        >
+        <na-button type="success" @click="handleEdit(slot.data)"
+          >编辑</na-button
+        >
+        <na-button type="warning" @click="handleDelete(slot.data)"
           >删除</na-button
         >
       </template>
@@ -20,34 +40,70 @@ export default {
     return {
       column: [
         {
-          label: "标题",
-          prop: "title",
-          type: "function",
-          callback: (row) => {
-            if (row.id === 1) {
-              return `<a href="https://www.baidu.com">${row.title}</a>`;
-            }
-            return `<span>${row.title}</span>`;
-          },
+          label: "姓名",
+          prop: "name",
         },
-        // { label: "日期", prop: "date", Width: 500 },
-        { label: "姓名", prop: "name" },
-        { label: "地址", prop: "address" },
-        { label: "性别", prop: "sex" },
+        {
+          label: "创建时间",
+          prop: "create_date",
+          sort: true,
+          sortBy: "a.xx",
+        },
+        {
+          label: "广告图片",
+          prop: "url",
+          type: "image",
+        },
         {
           label: "操作",
-          prop: "operation",
           type: "slot",
           slot_name: "operation",
           prop: "operation",
         },
       ],
+      data_1: {
+        name: "jack",
+      },
+      params_1: {
+        name: "rose",
+      },
+      checkList: [],
     };
   },
-  components: {
-    naTable: () => import("../components/table/index.vue"),
-    naButton: () => import("../components/button/index.vue"),
+  watch: {
+    checkList: {
+      handler(val) {
+        console.log(val);
+      },
+      deep: true,
+    },
   },
-  methods: {},
+  components: {
+    naButton: () => import("../components/button/index.vue"),
+    naTable: () => import("../components/table/index.vue"),
+  },
+  methods: {
+    getCheckList() {
+      console.log(this.checkList);
+    },
+    handleEdit(row) {
+      console.log(row);
+    },
+    handleDelete(row) {
+      console.log(row);
+    },
+    onLoad(data) {
+      console.log(data);
+    },
+    formatData(data) {
+      const tableData = data.data;
+      tableData.forEach((item) => {
+        item.gender = item.gender === "男" ? 1 : 0;
+      });
+      return tableData;
+    },
+  },
 };
 </script>
+
+<style scoped></style>

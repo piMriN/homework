@@ -7,12 +7,18 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "home",
+    name: "HomeView",
     component: HomeView,
+  },
+  {
+    path: "/advert",
+    name: "advert",
+    component: () => import("../views/Advert.vue"),
   },
 ];
 
 const router = new VueRouter({
+  mode: "history",
   routes,
 });
 

@@ -1,15 +1,9 @@
 <template>
-  <button
-    @click="change"
-    :disabled="disabled || loading"
-    class="yang-button"
-    :style="[minWidthCss]"
-    :class="[theme, isRound, isBorder, isSize, blockCss]"
-  >
+  <button @click="change" :disabled="disabled || loading " class="na-button" :style="[minWidthCss]" :class="[theme, isRound, isBorder, isSize, blockCss]">
     <span>
       <i v-if="loading" class="iconfont icon-prefix icon-loading"></i>
       <i v-if="prefix" class="iconfont icon-prefix" :class="iconPrefix"></i>
-      <slot></slot>
+        <slot></slot>
       <i v-if="suffix" class="iconfont icon-suffix" :class="iconSuffix"></i>
     </span>
   </button>
@@ -17,67 +11,67 @@
 
 <script>
 export default {
-  name: "index",
+  name: 'index',
   props: {
     type: {
       type: String,
-      default: "",
+      default: ''
     },
     minWidth: {
       type: String,
-      default: "95px",
+      default: '95px'
     },
     size: {
       type: String,
-      default: "",
+      default: ''
     },
     prefix: {
       type: String,
-      default: "",
+      default: ''
     },
     suffix: {
       type: String,
-      default: "",
+      default: ''
     },
     round: Boolean,
     border: Boolean,
     disabled: Boolean,
     block: Boolean,
-    loading: Boolean,
+    loading: Boolean
   },
   computed: {
-    theme() {
-      return this.type ? `yang-button-${this.type}` : "";
+    theme () {
+      return this.type ? `na-button-${this.type}` : ''
     },
-    isRound() {
-      return this.round ? "is-round" : "";
+    isRound () {
+      return this.round ? 'is-round' : ''
     },
-    isBorder() {
-      return this.border ? "is-border" : "";
+    isBorder () {
+      return this.border ? 'is-border' : ''
     },
-    isSize() {
-      return this.size ? `yang-button-${this.size}` : "";
+    isSize () {
+      return this.size ? `na-button-${this.size}` : ''
     },
-    minWidthCss() {
-      if (!this.minWidth) return "";
-      return { "min-width": this.minWidth };
+    minWidthCss () {
+      if (!this.minWidth) return ''
+      return { 'min-width': this.minWidth }
     },
-    iconPrefix() {
-      return this.prefix ? `icon-${this.prefix}` : "";
+    iconPrefix () {
+      return this.prefix ? `icon-${this.prefix}` : ''
     },
-    iconSuffix() {
-      return this.suffix ? `icon-${this.suffix}` : "";
+    iconSuffix () {
+      return this.suffix ? `icon-${this.suffix}` : ''
     },
-    blockCss() {
-      return this.block ? "yang-button-block" : "";
-    },
+    blockCss () {
+      return this.block ? 'na-button-block' : ''
+    }
   },
   methods: {
-    change() {
-      this.$emit("click");
-    },
-  },
-};
+    change () {
+      this.$emit('click')
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
