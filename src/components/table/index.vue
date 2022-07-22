@@ -28,7 +28,7 @@ files.keys().forEach(item => {
 })
 console.log(modules)
 export default {
-  name: 'yangTable',
+  name: 'naTable',
   components: {
     ...modules
   },

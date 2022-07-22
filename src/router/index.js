@@ -11,6 +11,16 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/form",
+    name: "form",
+    component: () => import("../views/Form.vue"),
+  },
+  {
+    path: "/formview",
+    name: "formview",
+    component: () => import("../views/FormView.vue"),
+  },
+  {
     path: "/advert",
     name: "advert",
     component: () => import("../views/Advert.vue"),
