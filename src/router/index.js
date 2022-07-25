@@ -25,10 +25,15 @@ const routes = [
     name: "advert",
     component: () => import("../views/Advert.vue"),
   },
+  {
+    path: "/upload",
+    name: "upload",
+    component: () => import("../views/Upload.vue"),
+  },
 ];
 
 const router = new VueRouter({
-  mode: "history",
+  mode: "hash",
   routes,
 });
 
