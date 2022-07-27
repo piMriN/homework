@@ -4,7 +4,7 @@ import axios from "axios";
 // 请求多个公共接口
 // 创建axios实例对象
 const service = axios.create({
-  // baseURL: process.env.VUE_APP_API,
+  baseURL: process.env.VUE_APP_API,
   timeout: 5000,
 });
 

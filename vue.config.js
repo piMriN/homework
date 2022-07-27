@@ -6,7 +6,8 @@ module.exports = {
     https: false, // 编译失败时刷新页面
     proxy: {
       [process.env.VUE_APP_API]: {
-        target: 'http://upload.9yuecloud.com:8887', // API服务器的地址
+        target: 'http://blog.9yuecloud.com/pro-api',
+        // target: 'http://upload.9yuecloud.com:8887', // API服务器的地址
         changeOrigin: true,
         pathRewrite: {
           [`^${process.env.VUE_APP_API}`]: "",
